@@ -31,3 +31,4 @@ address _adminWalletJS = "XX";
 
 ToDos:
 Add only owner for addpoints
+test
