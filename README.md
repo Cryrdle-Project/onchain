@@ -30,4 +30,5 @@ address _adminWalletJS = "XX";
 
 
 ToDos:
-Add only owner for addpoints
+Add only owner for addpoints.
+Add Chainlink API
