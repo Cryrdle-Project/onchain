@@ -3,7 +3,7 @@
 // LINK token addresses: https://docs.chain.link/resources/link-token-contracts/
 // Price feeds addresses: https://docs.chain.link/data-feeds/price-feeds/addresses
 // Chain IDs: https://chainlist.org/?testnets=true
-
+const { ethers } = require("ethers")
 require("@chainlink/env-enc").config()
 
 const DEFAULT_VERIFICATION_BLOCK_CONFIRMATIONS = 2
@@ -21,7 +21,7 @@ if (!isTestEnvironment && !PRIVATE_KEY) {
 
 const networks = {
   ethereumSepolia: {
-    url: process.env.ETHEREUM_SEPOLIA_RPC_URL || "UNSET",
+    url: process.env.SEPOLIA_RPC_URL || "UNSET",
     gasPrice: undefined,
     accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
     verifyApiKey: process.env.ETHERSCAN_API_KEY || "UNSET",
@@ -33,6 +33,14 @@ const networks = {
     functionsOracleProxy: "0x649a2C205BE7A3d5e99206CEEFF30c794f0E31EC",
     functionsBillingRegistryProxy: "0x3c79f56407DCB9dc9b852D139a317246f43750Cc",
     functionsPublicKey: SHARED_DON_PUBLIC_KEY,
+    subscriptionId: "1479",
+    gasLane: "0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c",
+    keepersUpdateInterval: "86400",
+    cryrdleParticipationFee: ethers.utils.parseEther("0.001"),
+    callbackGasLimit: "500000", // 500,000 gas
+    vrfCoordinatorV2: "0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625",
+    walletJK: "0xC24d2a947B4AF45964Dc316a63cC1BFb373E81E8",
+    walletJS: "0xA2d937F18e9E7fC8d295EcAeBb10Acbd5e77e9eC",
   },
   polygonMumbai: {
     url: process.env.POLYGON_MUMBAI_RPC_URL || "UNSET",
