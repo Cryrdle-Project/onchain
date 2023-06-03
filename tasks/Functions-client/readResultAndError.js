@@ -2,10 +2,7 @@ const { getDecodedResultLog } = require("../../FunctionsSandboxLibrary")
 const path = require("path")
 const process = require("process")
 
-task(
-  "functions-read",
-  "Reads the latest response (or error) returned to a FunctionsConsumer or AutomatedFunctionsConsumer client contract"
-)
+task("functions-read", "Reads the latest response (or error) returned to a Cryrdle or AutomatedCryrdle client contract")
   .addParam("contract", "Address of the client contract to read")
   .addOptionalParam(
     "configpath",
@@ -16,12 +13,12 @@ task(
   .setAction(async (taskArgs) => {
     if (network.name === "hardhat") {
       throw Error(
-        'This command cannot be used on a local hardhat chain.  Specify a valid network or simulate an FunctionsConsumer request locally with "npx hardhat functions-simulate".'
+        'This command cannot be used on a local hardhat chain.  Specify a valid network or simulate an Cryrdle request locally with "npx hardhat functions-simulate".'
       )
     }
 
     console.log(`Reading data from Functions client contract ${taskArgs.contract} on network ${network.name}`)
-    const clientContractFactory = await ethers.getContractFactory("FunctionsConsumer")
+    const clientContractFactory = await ethers.getContractFactory("Cryrdle")
     const clientContract = await clientContractFactory.attach(taskArgs.contract)
 
     let latestError = await clientContract.latestError()

@@ -15,7 +15,7 @@ task("functions-perform-upkeep", "Manually call performUpkeep in an Automation c
 
     if (network.name === "hardhat") {
       throw Error(
-        'This command cannot be used on a local hardhat chain.  Specify a valid network or simulate an FunctionsConsumer request locally with "npx hardhat functions-simulate".'
+        'This command cannot be used on a local hardhat chain.  Specify a valid network or simulate an Cryrdle request locally with "npx hardhat functions-simulate".'
       )
     }
 
@@ -26,7 +26,7 @@ task("functions-perform-upkeep", "Manually call performUpkeep in an Automation c
         taskArgs.data ? ` with data ${performData}` : ""
       }`
     )
-    const autoClientContractFactory = await ethers.getContractFactory("AutomatedFunctionsConsumer")
+    const autoClientContractFactory = await ethers.getContractFactory("AutomatedCryrdle")
     const autoClientContract = await autoClientContractFactory.attach(taskArgs.contract)
 
     const checkUpkeep = await autoClientContract.performUpkeep(performData, overrides)

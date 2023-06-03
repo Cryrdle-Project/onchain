@@ -7,7 +7,7 @@ const { deleteGist } = require("../utils/github")
 const path = require("path")
 const process = require("process")
 
-task("functions-set-auto-request", "Updates the Functions request in a deployed AutomatedFunctionsConsumer contract")
+task("functions-set-auto-request", "Updates the Functions request in a deployed AutomatedCryrdle contract")
   .addParam("contract", "Address of the client contract")
   .addParam("subid", "Billing subscription ID used to pay for Functions requests", undefined, types.int)
   .addOptionalParam("interval", "Update interval in seconds for Automation to call performUpkeep", 300, types.int)
@@ -32,7 +32,7 @@ task("functions-set-auto-request", "Updates the Functions request in a deployed 
   .setAction(async (taskArgs) => {
     if (network.name === "hardhat") {
       throw Error(
-        'This command cannot be used on a local hardhat chain.  Specify a valid network or simulate an FunctionsConsumer request locally with "npx hardhat functions-simulate".'
+        'This command cannot be used on a local hardhat chain.  Specify a valid network or simulate an Cryrdle request locally with "npx hardhat functions-simulate".'
       )
     }
 
@@ -44,9 +44,9 @@ const setAutoRequest = async (contract, taskArgs) => {
     throw Error("Gas limit must be less than or equal to 300,000")
   }
 
-  console.log(`Setting the Functions request in AutomatedFunctionsConsumer contract ${contract} on ${network.name}`)
+  console.log(`Setting the Functions request in AutomatedCryrdle contract ${contract} on ${network.name}`)
 
-  const autoClientContractFactory = await ethers.getContractFactory("AutomatedFunctionsConsumer")
+  const autoClientContractFactory = await ethers.getContractFactory("AutomatedCryrdle")
   const autoClientContract = await autoClientContractFactory.attach(contract)
 
   const unvalidatedRequestConfig = require(path.isAbsolute(taskArgs.configpath)
@@ -126,7 +126,7 @@ const setAutoRequest = async (contract, taskArgs) => {
   }
 
   console.log(
-    `\n${create ? "Created new" : "Updated"} Functions request in AutomatedFunctionsConsumer contract ${
+    `\n${create ? "Created new" : "Updated"} Functions request in AutomatedCryrdle contract ${
       autoClientContract.address
     } on ${network.name}`
   )

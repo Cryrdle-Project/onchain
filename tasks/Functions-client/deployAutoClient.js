@@ -3,7 +3,7 @@ const { networks } = require("../../networks")
 const { addClientConsumerToSubscription } = require("../Functions-billing/add")
 const { setAutoRequest } = require("./setAutoRequest")
 
-task("functions-deploy-auto-client", "Deploys the AutomatedFunctionsConsumer contract")
+task("functions-deploy-auto-client", "Deploys the AutomatedCryrdle contract")
   .addParam("subid", "Billing subscription ID used to pay for Functions requests")
   .addOptionalParam("interval", "Update interval in seconds for Automation to call performUpkeep", 300, types.int)
   .addOptionalParam("verify", "Set to true to verify client contract", false, types.boolean)
@@ -28,7 +28,7 @@ task("functions-deploy-auto-client", "Deploys the AutomatedFunctionsConsumer con
   .setAction(async (taskArgs) => {
     if (network.name === "hardhat") {
       throw Error(
-        'This command cannot be used on a local hardhat chain.  Specify a valid network or simulate an FunctionsConsumer request locally with "npx hardhat functions-simulate".'
+        'This command cannot be used on a local hardhat chain.  Specify a valid network or simulate an Cryrdle request locally with "npx hardhat functions-simulate".'
       )
     }
 
@@ -36,12 +36,12 @@ task("functions-deploy-auto-client", "Deploys the AutomatedFunctionsConsumer con
       throw Error("Gas limit must be less than or equal to 300,000")
     }
 
-    console.log(`Deploying AutomatedFunctionsConsumer contract to ${network.name}`)
+    console.log(`Deploying AutomatedCryrdle contract to ${network.name}`)
 
     console.log("\n__Compiling Contracts__")
     await run("compile")
 
-    const autoClientContractFactory = await ethers.getContractFactory("AutomatedFunctionsConsumer")
+    const autoClientContractFactory = await ethers.getContractFactory("AutomatedCryrdle")
     const autoClientContract = await autoClientContractFactory.deploy(
       networks[network.name]["functionsOracleProxy"],
       taskArgs.subid,
@@ -88,5 +88,5 @@ task("functions-deploy-auto-client", "Deploys the AutomatedFunctionsConsumer con
       )
     }
 
-    console.log(`\nAutomatedFunctionsConsumer contract deployed to ${autoClientContract.address} on ${network.name}`)
+    console.log(`\nAutomatedCryrdle contract deployed to ${autoClientContract.address} on ${network.name}`)
   })

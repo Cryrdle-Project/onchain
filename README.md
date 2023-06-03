@@ -1,8 +1,11 @@
 # on-chain
+
 ## Contains all operations that are on-chain.
 
 ### Achievements
-At current, I worked on the following function: 
+
+At current, I worked on the following function:
+
 1. joinCryrdle() --> Join the Game by paying the participation fee and adding the address to the participants array.
 1. addPoints() --> A function that allows us to give points to participants based on their correct guesses. At the same time it also updates the winner array.
 1. checkUpkeep() --> This function makes sure that the game is restarted every 24 hours.
@@ -26,7 +29,7 @@ At current, I worked on the following function:
       - _POLYGON_MUMBAI_RPC_URL_, _ETHEREUM_SEPOLIA_RPC_URL_, _AVALANCHE_FUJI_RPC_URL_ for the network that you intend to use
    3. If desired, the `<explorer>_API_KEY` can be set in order to verify contracts, along with any values used in the _secrets_ object in _Functions-request-config.js_ such as `COINMARKETCAP_API_KEY`.<br><br>
 5. There are two files to notice that the default example will use:
-   - _contracts/FunctionsConsumer.sol_ contains the smart contract that will receive the data
+   - _contracts/Cryrdle.sol_ contains the smart contract that will receive the data
    - _calculation-example.js_ contains JavaScript code that will be executed by each node of the DON<br><br>
 6. Test an end-to-end request and fulfillment locally by simulating it using:<br>`npx hardhat functions-simulate`<br><br>
 7. Deploy and verify the client contract to an actual blockchain network by running:<br>`npx hardhat functions-deploy-client --network network_name_here --verify true`<br>**Note**: Make sure `<explorer>_API_KEY` is set if using `--verify true`, depending on which network is used.<br><br>
@@ -39,7 +42,7 @@ bash-3.2$ npx hardhat functions-deploy-client --network ethereumSepolia --verify
 secp256k1 unavailable, reverting to browser version
 Deploying Cryrdle contract to ethereumSepolia
 
-__Compiling Contracts__
+**Compiling Contracts**
 Nothing to compile
 
 Waiting 2 blocks for transaction 0x6122fe6e4b647f9a281eea6fd8ee92cf68546eeeba77e636c6bfc43bb6220e3a to be confirmed...
