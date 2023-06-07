@@ -17,7 +17,7 @@ const SOLC_SETTINGS = {
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  defaultNetwork: "hardhat",
+  defaultNetwork: "ethereumSepolia",
   solidity: {
     compilers: [
       {
@@ -39,6 +39,11 @@ module.exports = {
     ],
   },
   networks: {
+    ethereumSepolia: {
+      url: process.env.ETHEREUM_SEPOLIA_RPC_URL || "",
+      accounts: [process.env.PRIVATE_KEY],
+      saveDeployments: true,
+    },
     hardhat: {
       allowUnlimitedContractSize: true,
       accounts: process.env.PRIVATE_KEY

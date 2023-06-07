@@ -68,6 +68,7 @@ contract Cryrdle is VRFConsumerBaseV2, AutomationCompatibleInterface, FunctionsC
   event OCRResponse(bytes32 indexed requestId, bytes result, bytes err); //off-chain response from API call
 
   /* Mappings */
+  mapping(address => uint256) public winningCoin; // mapping to store
   mapping(address => uint256) public totalPointBalances; // mapping that tracks the total point balance of all participants
   mapping(uint256 => mapping(address => uint256)) public dayPointBalances; // mapping that tracks the daily point balance of all participants
   mapping(uint256 => mapping(address => bool)) public paidParticipationFee; //mapping that holds accounts of who paid
@@ -197,6 +198,7 @@ contract Cryrdle is VRFConsumerBaseV2, AutomationCompatibleInterface, FunctionsC
     if (secrets.length > 0) {
       req.addRemoteSecrets(secrets);
     }
+
     if (args.length > 0) req.addArgs(args);
 
     bytes32 assignedReqID = sendRequest(req, subscriptionId, gasLimit);
@@ -209,6 +211,10 @@ contract Cryrdle is VRFConsumerBaseV2, AutomationCompatibleInterface, FunctionsC
     latestResponse = response;
     latestError = err;
     emit OCRResponse(requestId, response, err);
+
+    if (response) {
+      winningCoin += response;
+    }
   }
 
   function updateOracleAddress(address oracle) public onlyOwner {
@@ -242,6 +248,11 @@ contract Cryrdle is VRFConsumerBaseV2, AutomationCompatibleInterface, FunctionsC
   receive() external payable {}
 
   /* view functions */
+
+  function getCoins() public view returns (address[] memory) {
+    return participants;
+  }
+
   function getParticipants() public view returns (address[] memory) {
     return participants;
   }
@@ -267,6 +278,10 @@ contract Cryrdle is VRFConsumerBaseV2, AutomationCompatibleInterface, FunctionsC
 
   function getHighScore() public view returns (uint256) {
     return highscore;
+  }
+
+  function getCoin() public view returns (bytes32) {
+    return winningCoin;
   }
 
   function getPlayerDayPointBalance(address playerAddress) public view returns (uint256) {
