@@ -254,7 +254,6 @@ contract Cryrdle is VRFConsumerBaseV2, AutomationCompatibleInterface, FunctionsC
   }
   }
 
-
   function getCoins() public view returns (address[] memory) {
     return participants;
   }
