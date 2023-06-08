@@ -242,6 +242,12 @@ contract Cryrdle is VRFConsumerBaseV2, AutomationCompatibleInterface, FunctionsC
   receive() external payable {}
 
   /* view functions */
+  function getLatestData() public view returns (string memory) {
+    // Convert the bytes response to a string
+    return string(latestResponse);
+  }
+  }
+
   function getParticipants() public view returns (address[] memory) {
     return participants;
   }
