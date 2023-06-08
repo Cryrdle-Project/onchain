@@ -21,6 +21,7 @@ task("functions-deploy-client", "Deploys the Cryrdle contract")
     const VRFCoordinatorAddress = networks[network.name]["vrfCoordinatorV2"]
     const AdminWalletJK = networks[network.name]["walletJK"]
     const AdminWalletJS = networks[network.name]["walletJS"]
+    const AdminWalletKP = networks[network.name]["walletKP"]
 
     console.log("\n__Compiling Contracts__")
     await run("compile")
@@ -35,6 +36,7 @@ task("functions-deploy-client", "Deploys the Cryrdle contract")
       VRFCallbackGasLimit,
       AdminWalletJK,
       AdminWalletJS,
+      AdminWalletKP,
       oracleAddress
     )
 
@@ -53,7 +55,18 @@ task("functions-deploy-client", "Deploys the Cryrdle contract")
         await clientContract.deployTransaction.wait(Math.max(6 - networks[network.name].confirmations, 0))
         await run("verify:verify", {
           address: clientContract.address,
-          constructorArguments: [oracleAddress],
+          constructorArguments: [
+            VRFCoordinatorAddress,
+            VRFSubscriptionId,
+            VRFGasLane,
+            KeepersTimeInterval,
+            ParticipationFee,
+            VRFCallbackGasLimit,
+            AdminWalletJK,
+            AdminWalletJS,
+            AdminWalletKP,
+            oracleAddress,
+          ],
         })
         console.log("Contract verified")
       } catch (error) {

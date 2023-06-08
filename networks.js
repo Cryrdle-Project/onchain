@@ -41,6 +41,7 @@ const networks = {
     vrfCoordinatorV2: "0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625",
     walletJK: "0xC24d2a947B4AF45964Dc316a63cC1BFb373E81E8",
     walletJS: "0xA2d937F18e9E7fC8d295EcAeBb10Acbd5e77e9eC",
+    walletKP: "0xA2d937F18e9E7fC8d295EcAeBb10Acbd5e77e9eC",
   },
   polygonMumbai: {
     url: process.env.POLYGON_MUMBAI_RPC_URL || "UNSET",
