@@ -66,7 +66,3 @@ Owner: 0xC24d2a947B4AF45964Dc316a63cC1BFb373E81E8
 Balance: 5.0 LINK
 1 authorized consumer contract:
 [ '0x13628eC3603e93c69F4cd85dfD6B3524D0062D87' ]
-
-ToDos:
-Add only owner for addpoints
-test
